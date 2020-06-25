@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../his10" />
+    <file type="web" url="file://$PROJECT_DIR$/../his11" />
+    <file type="web" url="file://$PROJECT_DIR$/../his12" />
+    <file type="web" url="file://$PROJECT_DIR$/../his2" />
+    <file type="web" url="file://$PROJECT_DIR$" />
+    <file type="web" url="file://$PROJECT_DIR$/../his4" />
+    <file type="web" url="file://$PROJECT_DIR$/../his5" />
+    <file type="web" url="file://$PROJECT_DIR$/../his6" />
+    <file type="web" url="file://$PROJECT_DIR$/../his7" />
+    <file type="web" url="file://$PROJECT_DIR$/../his8" />
+    <file type="web" url="file://$PROJECT_DIR$/../his9" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/../his2/pom.xml" />
+        <option value="$PROJECT_DIR$/../his4/pom.xml" />
+        <option value="$PROJECT_DIR$/../his5/pom.xml" />
+        <option value="$PROJECT_DIR$/../his6/pom.xml" />
+        <option value="$PROJECT_DIR$/../his7/pom.xml" />
+        <option value="$PROJECT_DIR$/../his8/pom.xml" />
+        <option value="$PROJECT_DIR$/../his9/pom.xml" />
+        <option value="$PROJECT_DIR$/../his10/pom.xml" />
+        <option value="$PROJECT_DIR$/../his11/pom.xml" />
+        <option value="$PROJECT_DIR$/../his12/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

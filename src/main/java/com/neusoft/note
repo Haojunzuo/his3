@@ -1,0 +1,15 @@
+#&userSSL=true//这个加到url上面，应该是是否使用ssl，本机使用是不用ssl的，但是mysql8.0以上的版本一定要加上serverTimezone=UTC
+注释分两种，行注释和段注释，行注释ctrl+/即可，段注释ctrl+shif+/  快捷键：打出/**后再按enter键即可进行段注释
+繁体字和简体字切换ctrl+shift+f，这个尽量不要用
+mapper.xml文件中常使用的有parameterType   resultType  等
+HttpSession
+${pageContext.request.contextPath}，加在使用的css，js等文件下，可以避免路径冲突，也可以在header里面第一行加上一个
+<base href="${pageContext.request.contextPath}">
+在jsp或者html中元素的属性加上id，可以方便利用jquery操作
+jquery使用。。。ajax使用。。。
+jquery的页面的初始化行为，有三种语法形式：$(document).ready(function(){});      $().ready(function(){});   $(function(){});
+常用的记着$(function(){})就可。
+
+jquery调用AJAX $.ajax(){}   ajax的使用原则url:   data:   method:   success:function(){}   其中url是必须要有的
+url是处理AJAX的服务器地址，data是发送AJAX请求时传递的参数，method是发送的HTTP请求方式，success是AJAX请求成功时触发的函数。
+序列化ajax数据  实例  data:$("#form1").serialize(),
