@@ -11,13 +11,10 @@ import java.util.List;
 public class DoctorService {
     @Resource
     private DoctorMapper doctorMapper;
-    public List<Doctor> getDoctorData(){
-        return doctorMapper.getDoctorData();
-    }
-    public Doctor getDoctorById(int doctorid){
-        return doctorMapper.selectById(doctorid);
-    }
     public List<Doctor> selectByDeptId(int deptid){
         return doctorMapper.selectByDeptId(deptid);
+    }
+    public Doctor selectByDname(String dname){
+        return doctorMapper.selectByDname(dname);
     }
 }

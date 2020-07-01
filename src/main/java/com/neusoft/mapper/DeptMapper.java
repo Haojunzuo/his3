@@ -7,6 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface DeptMapper {
-    public List<Dept> getDeptData();
+    public List<Dept> selectAll();
     public Dept selectById(int deptid);
 }

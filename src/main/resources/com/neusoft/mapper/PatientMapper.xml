@@ -3,27 +3,25 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.mapper.PatientMapper"  >
-    <select id="selectPatients" resultMap="myMap" parameterType="int">
-        select * from patient where status = #{status}
-    </select>
-    <select id="selectPatientById" resultType="Patient" parameterType="int">
-        select * from patient where pid = #{pid}
-    </select>
-    <update id="refundPatient" parameterType="int">
-        update patient set pstatus = '已退号' where pid = #{pid}
-    </update>
     <insert id="insert" parameterType="Patient">
 		insert into patient values(null,#{pname},#{sex},#{age},#{birthday},#{idcard},#{address},#{levelid},#{deptid},#{doctorid},#{createDate},#{cost},'已挂号',0,#{operator},now())
 	</insert>
     <select id="selectByPid" parameterType="int" resultMap="myMap">
-        select * from patient,doctor,dept,level where patient.doctorid=doctor.id and patient.levelid=level.id and patient.deptid=dept.id and pid=#{pid}
+        select * from patient where pid=#{pid}
     </select>
+<!--    这个将要被覆盖，patient的显示方式没有全部显示的-->
     <select id="selectAll" resultMap="myMap">
-        select * from patient,doctor,dept,level where patient.doctorid=doctor.id and patient.levelid=level.id and patient.deptid=dept.id order by createDate desc
+        select * from patient order by createDate desc
     </select>
     <update id="refund" parameterType="int">
         update patient set pstatus="已退号" where pid=#{pid}
     </update>
+    <select id="select1" resultMap="myMap" parameterType="String">
+        select * from patient where status=0 and pstatus='已挂号' and doctorid=(select id from doctor where dname=#{dname})
+    </select>
+    <select id="select2" resultMap="myMap" parameterType="String">
+        select * from patient where status>=1 and pstatus='已挂号' and doctorid=(select id from doctor where dname=#{dname})
+    </select>
     <resultMap id="myMap" type="Patient">
         <id property="pid" column="pid"></id>
         <result property="sex" column="sex"></result>
@@ -35,6 +33,5 @@
         <association property="dept" column="deptid" select="com.neusoft.mapper.DeptMapper.selectById"/>
         <association property="doc" column="doctorid" select="com.neusoft.mapper.DoctorMapper.selectById"/>
         <association property="medicalRecord" column="pid" select="com.neusoft.mapper.MedicalRecordMapper.selectById"/>
-
     </resultMap>
 </mapper>

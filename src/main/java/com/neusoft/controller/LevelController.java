@@ -25,6 +25,6 @@ public class LevelController {
     @RequestMapping("/selectAll")
     public List<Level> selectAll()
     {
-        return levelService.getLevelData();
+        return levelService.selectAll();
     }
 }

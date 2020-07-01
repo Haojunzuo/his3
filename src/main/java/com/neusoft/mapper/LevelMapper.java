@@ -7,6 +7,6 @@ import java.util.List;
 
 @Mapper
 public interface LevelMapper {
-    public List<Level> getLevelData();
+    public List<Level> selectAll();
     public Level selectById(int id);
 }

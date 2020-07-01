@@ -15,16 +15,7 @@ import java.util.List;
 public class DoctorController {
     @Autowired
     private DoctorService doctorService;
-    @ResponseBody
-    @RequestMapping("/getDoctorById")
-    public Doctor getDoctorById(@RequestParam("doctorid") String doctorid){
-        return doctorService.getDoctorById(Integer.parseInt(doctorid));
-    }
-    @ResponseBody
-    @RequestMapping("/selectAll")
-    public List<Doctor> selectAll(){
-        return doctorService.getDoctorData();
-    }
+
     @ResponseBody
     @RequestMapping("/selectByDeptId")
     public List<Doctor> selectByDeptId(int deptid){

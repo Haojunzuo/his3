@@ -17,9 +17,6 @@ public class PatientService {
     public Patient selectPatientById(Integer pid){
         return patientMapper.selectPatientById(pid);
     }
-    public void refundPatient(Integer pid){
-        patientMapper.refundPatient(pid);
-    }
     public int insert(Patient patient){
         return patientMapper.insert(patient);
     }
@@ -31,5 +28,11 @@ public class PatientService {
     }
     public int refund(int id){
         return patientMapper.refund(id);
+    }
+    public List<Patient> select1(String dname){
+        return patientMapper.select1(dname);
+    }
+    public List<Patient> select2(String dname){
+        return patientMapper.select2(dname);
     }
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper
 public interface DoctorMapper {
-    public List<Doctor> getDoctorData();
-    public Doctor selectById(int doctorid);
+    public Doctor selectById(int id);
     public List<Doctor> selectByDeptId(int deptid);
+    public Doctor selectByDname(String dname);
 }

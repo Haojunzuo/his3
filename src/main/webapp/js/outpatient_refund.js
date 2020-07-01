@@ -85,10 +85,10 @@ $(function () {
 			success:function (data) {
 			console.log(data);
 			if(data==1){
+				alert("退号成功");
 				$("#status").text("已退号");
 				$("#refund")[0].disabled = true;
 				$("#refund")[0].style.color = "grey";
-				alert("退号成功");
 			}else{
 				alert("退号失败");
 			}
@@ -108,10 +108,10 @@ $(function () {
 		location.href="/outpatient_pay.html";
 	});
 
-	//点击退号管理进入退号页面
-	$("#refund").click(function(){
-		location.href="/Patient/PatientController/startRefundPatient";
-	});
+	// //点击退号管理进入退号页面  。。。。。这个是点击退号，不能进入退号页面，应该直接退号
+	// $("#refund").click(function(){
+	// 	location.href="/Patient/PatientController/startRefundPatient";
+	// });
 
 
 });

@@ -28,9 +28,9 @@ $(function(){//页面的初始化行为，有三种语法形式：$(document).re
 			success:function (data) {
 				// alert(data);
 				if (data=="门诊管理员"){
-					location.href = "Patient/PatientController/startPatient";//可以调用页面，但是页面不好拦截
+					location.href = "/Patient/PatientController/startPatient";//可以调用页面，但是页面不好拦截
 				}else if(data=="医生管理员"){
-					location.href = "Patient/PatientController/selectPatients";
+					location.href = "/Doctor/MedicalRecordController/startMedicalRecord";
 				}else if(data=="error"){
 					alert("对不起，登录信息有误，请重新登录！");
 				}

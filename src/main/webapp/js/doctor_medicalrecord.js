@@ -30,8 +30,8 @@ $(function(){
 	//未看诊列表的每一行绑定单击事件，跳转到下一页面
 	$(document).on("click",".first_table",function(){
 		var pid = $(this).attr("data-pid");
-		location.href="doctor_regmedicalrecord.html?pid="+pid;
-	})
+		location.href="/doctor_regmedicalrecord.html?pid="+pid;
+	});
 	
 	//点击检查申请进入下一页面
 	$("#div1_2").click(function(){
@@ -49,6 +49,6 @@ $(function(){
 	})
 	
 	
-})
+});
 
 

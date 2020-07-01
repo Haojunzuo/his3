@@ -12,8 +12,8 @@ import java.util.List;
 public class DeptService {
     @Resource
     private DeptMapper deptMapper;
-    public List<Dept>getDeptData(){
-        return deptMapper.getDeptData();
+    public List<Dept>selectAll(){
+        return deptMapper.selectAll();
     }
     public Dept getDeptById(int deptid){
         return deptMapper.selectById(deptid);

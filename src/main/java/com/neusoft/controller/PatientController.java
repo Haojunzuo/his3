@@ -30,24 +30,19 @@ public class PatientController {
     private DoctorService doctorService;
     @Autowired
     private DeptService deptService;
-    @RequestMapping("/selectPatients")
-    public String selectPatients1(Model model){
-        List<Patient> patients1 = patientService.selectPatients(0);
-        List<Patient> patients2 = patientService.selectPatients(1);
-        model.addAttribute("depts",deptService.getDeptData());
-        model.addAttribute("levels",levelService.getLevelData());
-        model.addAttribute("doctors",doctorService.getDoctorData());
-        model.addAttribute("patients1",patients1);
-        model.addAttribute("patients2",patients2);
-        return "doctor_medicalrecord";
-    }
-    @ResponseBody
-    @RequestMapping("/selectPatientById")
-    public Patient selectPatientById( @RequestParam("pid") String pid, Model model){
-        Patient patient = patientService.selectPatientById(Integer.parseInt(pid));
-//        Patient patient = patientService.selectPatientById(1);
-        return patient;
-    }
+    //这个方法都是使用老师给的百度网盘的视频的思路完成的，属于在前端进行判断等操作，老师这次讲得是直接将相关数据封装进入一个patient对象，问题都在后端解决了。
+//    @RequestMapping("/selectPatients")
+//    public String selectPatients1(Model model){
+//        List<Patient> patients1 = patientService.selectPatients(0);
+//        List<Patient> patients2 = patientService.selectPatients(1);
+//        model.addAttribute("depts",deptService.getDeptData());
+//        model.addAttribute("levels",levelService.getLevelData());
+//        model.addAttribute("doctors",doctorService.getDoctorData());
+//        model.addAttribute("patients1",patients1);
+//        model.addAttribute("patients2",patients2);
+//        return "doctor_medicalrecord";
+//    }
+
     //门诊管理员的第一个页面（挂号）的入口
     @RequestMapping("/startPatient")
     public String startPatient(Model model){
@@ -75,6 +70,7 @@ public class PatientController {
         System.out.println(p.getBirthday());
         if(u!=null){
             p.setOperator(u.getUserid());
+            System.out.println(u.getRole());
             try {
                 patientService.insert(p);
             } catch (Exception e) {

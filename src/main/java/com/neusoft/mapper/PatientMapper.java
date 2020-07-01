@@ -8,9 +8,10 @@ import java.util.List;
 public interface PatientMapper {
     public List<Patient> selectPatients(Integer status);
     public Patient selectPatientById(Integer pid);
-    public void refundPatient(Integer id);
     public int insert(Patient patient);
     public Patient selectByPid(Integer id);
     public List<Patient> selectAll();
     public int refund(int id);
+    public List<Patient> select1(String dname);
+    public List<Patient> select2(String dname);
 }

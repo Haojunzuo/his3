@@ -23,6 +23,6 @@ public class DeptController {
     @ResponseBody
     @RequestMapping("/selectAll")
     public List<Dept> selectAll(){
-        return deptService.getDeptData();
+        return deptService.selectAll();
     }
 }

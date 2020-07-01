@@ -11,8 +11,8 @@ import java.util.List;
 public class LevelService {
     @Resource
     private LevelMapper levelMapper;
-    public List<Level> getLevelData(){
-        return levelMapper.getLevelData();
+    public List<Level> selectAll(){
+        return levelMapper.selectAll();
     }
     public Level getLevelById(int levelid){
         return levelMapper.selectById(levelid);

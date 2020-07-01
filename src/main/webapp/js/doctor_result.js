@@ -185,7 +185,7 @@ $(function () {
 			location.reload();
 		}else{
 			$.ajax({
-				url:"/Patient/PatientController/selectByPid",
+				url:"/Doctor/MedicalRecordController/startMedicalRecord",
 				data:"pid="+$("#pid").val(),
 				success:function (data) {
 					if(data.pid==-1){
