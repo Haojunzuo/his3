@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.PatientMapper"  >
+    <select id="selectPatients" resultMap="myMap" parameterType="int">
+        select * from patient where status = #{status}
+    </select>
+    <select id="selectPatientById" resultType="Patient" parameterType="int">
+        select * from patient where pid = #{pid}
+    </select>
+    <update id="refundPatient" parameterType="int">
+        update patient set pstatus = '已退号' where pid = #{pid}
+    </update>
+    <insert id="insert" parameterType="Patient">
+		insert into patient values(null,#{pname},#{sex},#{age},#{birthday},#{idcard},#{address},#{levelid},#{deptid},#{doctorid},#{createDate},#{cost},'已挂号',0,#{operator},now())
+	</insert>
+    <select id="selectByPid" parameterType="int" resultMap="myMap">
+        select * from patient,doctor,dept,level where patient.doctorid=doctor.id and patient.levelid=level.id and patient.deptid=dept.id and pid=#{pid}
+    </select>
+    <select id="selectAll" resultMap="myMap">
+        select * from patient,doctor,dept,level where patient.doctorid=doctor.id and patient.levelid=level.id and patient.deptid=dept.id order by createDate desc
+    </select>
+    <update id="refund" parameterType="int">
+        update patient set pstatus="已退号" where pid=#{pid}
+    </update>
+    <resultMap id="myMap" type="Patient">
+        <id property="pid" column="pid"></id>
+        <result property="sex" column="sex"></result>
+        <result property="age" column="age"></result>
+        <result property="birthday" column="birthday"></result>
+        <result property="idcard" column="idcard"></result>
+        <result property="address" column="address"></result>
+        <association property="level" column="levelid" select="com.neusoft.mapper.LevelMapper.selectById"/>
+        <association property="dept" column="deptid" select="com.neusoft.mapper.DeptMapper.selectById"/>
+        <association property="doc" column="doctorid" select="com.neusoft.mapper.DoctorMapper.selectById"/>
+        <association property="medicalRecord" column="pid" select="com.neusoft.mapper.MedicalRecordMapper.selectById"/>
+
+    </resultMap>
+</mapper>

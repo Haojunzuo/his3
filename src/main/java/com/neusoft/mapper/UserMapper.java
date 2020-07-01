@@ -8,5 +8,6 @@ import java.util.List;
 
 public interface UserMapper {
     public List<String> selectRoles();
-    public List<User> selectUser(User u);//尽量返回list，然後在service层进行判断
+    public List<User> selectUser(User u);//尽量返回list，然后在service层进行判断
+
 }

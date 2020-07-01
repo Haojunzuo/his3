@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html>
 	<head>
 		<meta charset="UTF-8">
 		<title>门诊管理_挂号</title>
@@ -28,11 +28,9 @@
 			挂号信息
 		</div>
 		<div id="div3"  >
-			<form id="form1" name="form1">
+			<form id="form1"  name="form1">
 				<div id="div3_1" >
-<!--					<div>-->
-<!--						病历号：<input type="text"  id="pid" name="pid"  /><span class="star" >*</span>-->
-<!--					</div>-->
+
 					<div>
 						姓名：<input type="text" name="pname"  /><span class="star" >*</span>
 					</div>
@@ -45,8 +43,7 @@
 						年龄：<input type="text" id="age"  name="age"  />
 					</div>
 					<div>
-<!--						出生日期：<input type="text" class="data_birthday" id="year" name="year"  />年   <input type="text" name="month" class="data_birthday"  />月-->
-						出生日期:<input type="date" name="birthday" id="birthday">
+						出生日期：<input type="date" name="birthday" id="birthday">
 					</div>
 				</div>
 				<div id="div3_2"  >
@@ -59,7 +56,7 @@
 					<div>
 						挂号级别：
 						<select id="levelid" name="levelid" >
-							<option value="-1" >------请选择------</option>
+
 						</select>
 						<span class="star" >*</span>
 					</div>
@@ -102,7 +99,7 @@
 		<div id="div4" >
 			<span>挂号信息列表</span>
 			<div id="div4_1" >
-				<img src="/img/refresh.png" id="refresh"  /><label>刷新</label>
+				<img src="img/refresh.png" id="refresh"  /><label>刷新</label>
 			</div>
 		</div>
 		<div  id="div5" >
@@ -119,21 +116,7 @@
 					<th>看诊科室</th>
 					<th>看诊医生</th>
 				</tr>
-				<tr th:each="patient:${patients}">
-					<td th:text="${patient.pid}"></td>
-					<td th:text="${patient.pname}"></td>
-					<td th:text="${patient.sex}"></td>
-					<td th:text="${patient.idcard}"></td>
-					<td th:text="${patient.createDate}"></td>
-					<td th:text="${patient.level.levelname}"></td>
-					<td>
-						<span th:if="${patient.status==0}" th:text="否"></span>
-						<span th:if="${patient.status==1}" th:text="是"></span>
-					</td>
-					<td th:text="${patient.pstatus}"></td>
-					<td th:text="${patient.dept.deptname}"></td>
-					<td th:text="${patient.doc.dname}"></td>
-				</tr>
+				
 				
 			</table>
 		</div>

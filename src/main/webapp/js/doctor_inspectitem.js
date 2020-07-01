@@ -130,7 +130,7 @@ $(function(){
 	
 	//点击病例进入病例页面
 	$("#div1_1").click(function(){
-		location.href="doctor_medicalrecord.html";
+		location.href="/Patient/PatientController/selectPatients";
 	});
 	
 	//点击检查申请进入检查申请页面

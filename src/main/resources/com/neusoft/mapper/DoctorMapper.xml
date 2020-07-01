@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.DoctorMapper"  >
+    <select id="getDoctorData" resultType="doctor">
+        select * from doctor
+    </select>
+    <select id="selectById" resultType="doctor" parameterType="int">
+        select * from doctor where id=#{doctorid}
+    </select>
+    <select id="selectByDeptId" resultType="doctor" parameterType="int">
+        select * from doctor where deptid=#{deptid}
+    </select>
+</mapper>

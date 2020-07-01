@@ -13,3 +13,65 @@ jquery的页面的初始化行为，有三种语法形式：$(document).ready(fu
 jquery调用AJAX $.ajax(){}   ajax的使用原则url:   data:   method:   success:function(){}   其中url是必须要有的
 url是处理AJAX的服务器地址，data是发送AJAX请求时传递的参数，method是发送的HTTP请求方式，success是AJAX请求成功时触发的函数。
 序列化ajax数据  实例  data:$("#form1").serialize(),
+
+
+//这段代码是迄今为止2020年6月28日21:29:39   这个项目最为优秀的地方。
+里面包含了对ajax的使用，对传输数据的值的遍历，使用jquery为dom添加新的元素，利用传输数据为新元素赋值，使用动态处理综合等操作。是编程过程中值得借鉴和学习的地方。
+$(function () {
+	var cost;//定义一个全局变量cost，记录总价钱
+	//点击退号管理进入退号页面
+	$("#refund").click(function(){
+		location.href="/outpatient_refund.html";
+	});
+
+	//点击门诊收费管理进入收费页面
+	$("#div1_2").click(function(){
+		location.href="/outpatient_pay.html";
+	});
+
+	$("#levelid").change(function () {//这里的levelid对应的是select标签，即下拉标签，这个标签可以在显示值改变时执行js操作，因此使用.change(function(){})
+		cost = $("#levelid option:selected").attr("data-cost");//将选中的select元素的属性data-cost的值赋给cost
+		$("#cost").val(cost);//为id为cost的元素赋值，值为cost。
+		if(form1.flag.value=='1'){//如果选择的是需要病历本，则总价钱为cost+1
+			$("#cost").val(parseInt(cost)+1);
+		}
+	});
+	$("#yes").click(function () {//当“是”被选中时，如果当前的总价钱和挂号费用相等，则需要加上病历本的价钱；否则不执行操作。
+		if(parseInt(cost)==$("#cost").val()){
+			$("#cost").val(parseInt(cost)+1);
+		}
+	});
+
+	$("#no").click(function () {//当“否”被选中时，直接将挂号的费用赋给总价钱。
+		$("#cost").val(cost);
+	});
+	//初始化级别
+	initLevel();//页面加载将会先执行这个函数。
+	function initLevel() {
+		$.ajax({//使用ajax请求，查询所有的挂号级别
+			url:"/LevelController/selectAll",//ajax请求的路径
+			success:function (data) {//ajax请求成功之后执行的回调函数
+				$("#levelid").append("<option value='' data-cost=''>"+""+"</option>");//为id号为levelid的元素，也就是select元素增加一个子元素：<option value='' data-cost=''></option>
+			for(var i=0;i<data.length;i++){
+				//对获取到的每一个level都生成一个     <option value='id' data-cost='cost'>levelname</option>      操作
+				$("#levelid").append("<option value='"+data[i].id+"' data-cost='"+data[i].cost+"'>"+data[i].levelname+"</option>");
+			}
+			}
+
+		});
+	}
+});
+
+
+在引用的js,css等文件的href或src的路径的前面加上/会解决路径找不到的问题。
+
+
+serialize()方法创建以标准url编码表示的文本字符串，它的操作对象是代表表单元素集合
+的jquery对象，通过序列化表单值，创建url编码文本字符串，输出标准字符串：a=1&b=2&c=3&d=4&e=5
+一种是id 一种是普通的属性  一种是対一的对象，一种是对多的对象。
+
+UNIQUE KEY `uq_idcard` (`idcard`),设置唯一的列。
+
+org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing
+ (template: "ServletContext resource [/doctor_medicalrecord.html]")
+ 这种报错是模板解析错误，就是从后端向thymeleaf模板传值的时候解析错误。

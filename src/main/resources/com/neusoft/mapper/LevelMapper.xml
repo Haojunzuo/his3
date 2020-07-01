@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.LevelMapper"  >
+    <select id="getLevelData" resultType="level">
+        select * from level
+    </select>
+    <select id="selectById" parameterType="int" resultType="level">
+        select * from level where id=#{levelid}
+    </select>
+</mapper>

@@ -35,17 +35,17 @@ $(function(){
 	
 	//点击检查申请进入下一页面
 	$("#div1_2").click(function(){
-		location.href="doctor_checkitem.html";
+		location.href="/doctor_checkitem.html";
 	})
 	
 	//点击检验申请进入下一页面
 	$("#div1_3").click(function(){
-		location.href="doctor_inspectitem.html";
+		location.href="/doctor_inspectitem.html";
 	})
 	
 	//点击确诊进入确诊页面
 	$("#div1_4").click(function(){
-		location.href="doctor_result.html";
+		location.href="/doctor_result.html";
 	})
 	
 	
