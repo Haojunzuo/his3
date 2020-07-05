@@ -22,6 +22,9 @@
     <select id="select2" resultMap="myMap" parameterType="String">
         select * from patient where status>=1 and pstatus='已挂号' and doctorid=(select id from doctor where dname=#{dname})
     </select>
+    <update id="updateStatus" parameterType="int">
+		update patient set status=1 where pid=#{pid}
+	</update>
     <resultMap id="myMap" type="Patient">
         <id property="pid" column="pid"></id>
         <result property="sex" column="sex"></result>
@@ -32,6 +35,6 @@
         <association property="level" column="levelid" select="com.neusoft.mapper.LevelMapper.selectById"/>
         <association property="dept" column="deptid" select="com.neusoft.mapper.DeptMapper.selectById"/>
         <association property="doc" column="doctorid" select="com.neusoft.mapper.DoctorMapper.selectById"/>
-        <association property="medicalRecord" column="pid" select="com.neusoft.mapper.MedicalRecordMapper.selectById"/>
+        <association property="medicalRecord" column="pid" select="com.neusoft.mapper.MedicalRecordMapper.selectByPid"/>
     </resultMap>
 </mapper>

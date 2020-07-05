@@ -26,11 +26,8 @@ public class MedicalRecordController {
     private DoctorService doctorService;
     @Autowired
     private PatientService patientService;
-    @ResponseBody
-    @RequestMapping("/getMedicalRecordById")
-    public MedicalRecord getMedicalRecordById(int pid){
-        return medicalRecordService.getMedicalRecordById(pid);
-    }
+
+
     @ResponseBody
     @RequestMapping("/update")
     public int update(String result,String finalresult,int pid){
@@ -60,5 +57,17 @@ public class MedicalRecordController {
             model.addAttribute("patients2",patients2);
         }
         return "doctor_medicalrecord";
+    }
+    @ResponseBody
+    @RequestMapping("/createMedicalRecord")
+    public String createMedicalRecord(MedicalRecord m,HttpSession session){
+        User u = (User) session.getAttribute("user");
+        String name = "";
+        int userid = -1;
+        if(u!=null){
+            userid = u.getUserid();
+            m.setOperator(userid);
+        }
+        return medicalRecordService.createMedicalRecord(m);
     }
 }

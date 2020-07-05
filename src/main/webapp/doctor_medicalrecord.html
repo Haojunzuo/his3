@@ -6,8 +6,8 @@
     <link rel="stylesheet" href="/css/doctor_medicalrecord.css"/>
     <link rel="stylesheet" href="/css/common.css"/>
     <script type="text/javascript" src="/js/jquery-3.2.1.min.js"></script>
-    <script type="text/javascript" src="/js/doctor_medicalrecord.js"></script>
     <script type="text/javascript" src="/js/common.js"></script>
+    <script type="text/javascript" src="/js/doctor_medicalrecord.js"></script>
 </head>
 <body>
 <div id="div1">
@@ -46,7 +46,9 @@
         </tr>
         <!--        <c:forEach items="${patients1}" var="patient">-->
         <tr th:each="patient:${patients1}">
-            <td th:text="${patient.pid}"></td>
+            <td>
+                <span th:text="${patient.pid}" onclick="myPid(this)" class="pid"></span>
+            </td>
             <td th:text="${patient.pname}"></td>
             <td th:text="${patient.sex}"></td>
             <td th:text="${patient.idcard}"></td>
@@ -99,7 +101,9 @@
             <th>看诊医生</th>
         </tr>
         <tr th:each="patient:${patients2}">
-            <td th:text="${patient.pid}"></td>
+            <td>
+                <span th:text="${patient.pid}"></span>
+            </td>
             <td th:text="${patient.pname}"></td>
             <td th:text="${patient.sex}"></td>
             <td th:text="${patient.idcard}"></td>
@@ -119,6 +123,10 @@
         </tr>
     </table>
 </div>
-<iframe name="doctor_regmedicalrecord" width="1500px" height="700px" src="/doctor_regmedicalrecord.html"></iframe>
+<iframe name="f"  width="1250px" height="500px" src="/doctor_regmedicalrecord.html" th:border="0" scrolling="no"></iframe>
+<div id="div6"  >
+    <input id="regMr" type="button" value="生成病历" >
+    <input id="goback" type="button" value="返回" >
+</div>
 </body>
 </html>

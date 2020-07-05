@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.mapper.CheckItemRecordMapper"  >
+    <insert id="insert" parameterType="CheckItemRecord">
+        insert into checkitemrecord(pid,cid,amount,paystatus) values(#{pid},#{cid},#{amount},0)
+    </insert>
+    <select id="select" resultType="CheckItemRecord" parameterType="CheckItemRecord">
+        select * from checkitemrecord where pid=#{pid} and cid=#{cid}
+    </select>
+</mapper>

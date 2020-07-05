@@ -95,7 +95,7 @@
 $(function () {
 	//点击病例进入病例页面
 	$("#div1_1").click(function(){
-		location.href="/Patient/PatientController/selectPatients";
+		location.href="/Patient/MedicalRecordController/startMedicalRecord";
 	});
 
 	//点击检验申请进入下一页面

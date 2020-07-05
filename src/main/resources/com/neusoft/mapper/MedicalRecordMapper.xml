@@ -3,11 +3,13 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.neusoft.mapper.MedicalRecordMapper"  >
-    <select id="selectById" resultType="MedicalRecord" parameterType="int">
+    <select id="selectByPid" resultType="MedicalRecord" parameterType="int">
         select * from medicalrecord where pid = #{pid}
     </select>
-    <update id="update" parameterType="medicalRecord">
+    <update id="update" parameterType="MedicalRecord">
         update medicalrecord set result=#{result},finalresult=#{finalresult} where pid = #{pid}
     </update>
-
+    <insert id="insert" parameterType="MedicalRecord">
+		insert into medicalrecord(pid,description,medicalhistory,familyhistory,initialresult,operator,operatedate,status)values(#{pid},#{description},#{medicalhistory},#{familyhistory},#{initialresult},#{operator},now(),1)
+	</insert>
 </mapper>

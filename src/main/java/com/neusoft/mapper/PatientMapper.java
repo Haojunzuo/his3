@@ -14,4 +14,6 @@ public interface PatientMapper {
     public int refund(int id);
     public List<Patient> select1(String dname);
     public List<Patient> select2(String dname);
+
+    int updateStatus(Integer pid);
 }

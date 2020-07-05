@@ -49,3 +49,15 @@ th,td{
 #div1_2,#div1_3,#div1_4{
 	cursor: pointer;
 }
+#regMr,#goback{
+	width: 150px;
+	height: 25px;
+	color: blue;
+	font-weight: bold;
+	font-size: 16px;
+}
+#div6{
+	text-align:right;
+	padding-right: 50px;
+	padding-bottom: 200px;
+}

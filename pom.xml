@@ -136,6 +136,24 @@
   </dependencies>
 
   <build>
+<!--    这段配置是用来防止资源导出失败-->
+<!--    <resources>-->
+<!--      <resource>-->
+<!--        <directory>src/main/resources</directory>-->
+<!--        <includes>-->
+<!--          <include>**/*.properties</include>-->
+<!--          <include>**/*.xml</include>-->
+<!--        </includes>-->
+<!--      </resource>-->
+<!--      <resource>-->
+<!--        <directory>src/main/java</directory>-->
+<!--        <includes>-->
+<!--          <include>**/*.properties</include>-->
+<!--          <include>**/*.xml</include>-->
+<!--        </includes>-->
+<!--      </resource>-->
+<!--    </resources>-->
+
     <finalName>his3</finalName>
     <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
       <plugins>

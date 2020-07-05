@@ -3,30 +3,12 @@
 	<head>
 		<meta charset="UTF-8">
 		<title>医生工作站_病例</title>
-		<link rel="stylesheet" href="css/doctor_regmedicalrecord.css" />
-		<link rel="stylesheet" href="css/common.css" />
-		<script type="text/javascript" src="js/jquery-3.2.1.min.js"  ></script>
-		<script type="text/javascript" src="js/doctor_regmedicalrecord.js"  ></script>
+		<link rel="stylesheet" href="/css/doctor_regmedicalrecord.css" />
+		<link rel="stylesheet" href="/css/common.css" />
+		<script type="text/javascript" src="/js/jquery-3.2.1.min.js"  ></script>
 		<script type="text/javascript" src="js/common.js"  ></script>
 	</head>
 	<body>
-<!--		<div id="div1" >-->
-<!--			<div class="div1_nav" id="div1_1"  >-->
-<!--				医生工作站_病例-->
-<!--			</div>-->
-<!--			<div class="div1_nav"   >-->
-<!--				医生工作站_检查申请-->
-<!--			</div>-->
-<!--			<div class="div1_nav"   >-->
-<!--				医生工作站_检验申请-->
-<!--			</div>-->
-<!--			<div class="div1_nav"   >-->
-<!--				医生工作站_确诊-->
-<!--			</div>-->
-<!--			<div class="div1_logout" id="logout"  >-->
-<!--				退出-->
-<!--			</div>-->
-<!--		</div>-->
 		<div id="div3"  class="data"   >
 			<div>
 				病历号：<input  type="text" id="pno"  value="" readonly="readonly"   />
@@ -73,6 +55,7 @@
 			病例信息
 		</div>
 		<form id="form1"  >
+			<input type="hidden" name="pid" id="pid2">
 			<div class="form_control"  >
 				<div class="form_data_name">
 					主诉：
@@ -107,9 +90,5 @@
 			</div>
 			
 		</form>
-		<div id="div6"  >
-			<button type="button" id="regMr"  >生&nbsp;&nbsp;成&nbsp;&nbsp;病&nbsp;&nbsp;历</button>
-			<button type="button" id="goback"  >返&nbsp;&nbsp;&nbsp;&nbsp;回</button>
-		</div>
 	</body>
 </html>

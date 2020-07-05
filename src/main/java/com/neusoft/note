@@ -75,3 +75,49 @@ UNIQUE KEY `uq_idcard` (`idcard`),设置唯一的列。
 org.thymeleaf.exceptions.TemplateInputException: An error happened during template parsing
  (template: "ServletContext resource [/doctor_medicalrecord.html]")
  这种报错是模板解析错误，就是从后端向thymeleaf模板传值的时候解析错误。
+
+
+7.2今天遇到特殊的问题，导致浪费了一个小时17分钟的时间，这个问题应该不是什么问题，但是让我很困惑，一直说数据库的数据和模型匹配不上，但是我仔细检查了所有的模型，都是没有问题
+的，这是什么东西啊，，，，，，  在我将所有的数据还原到昨晚上的版本后，才能够运行，我吐了。。。
+Mapped Statements collection does not contain value for com.neusoft.mapper.MedicalRecordMapper.selectById   这个错误是什么原因呢？
+善于建立事物的联系，编程中也是如此，两个看似不太相关的事物，可能就会产生很深的依赖关系，昨天晚上包括今天上午遇到的问题就是，把myMap里面的association里对应的
+select的绝对路径的内容更改了，但是在myMap里面却没有改，导致出现错误，并且不能找到错在哪，至少使用了四个小时的时间。。。。。。。。。。  这是一个惨重的教训。
+
+json和自定义类用的都挺多，（ajax请求）
+
+跳转路径时资源路径加/和不加/的区别
+加上/是访问当前项目下的资源路径，不是webapp目录，因为不包括项目名
+不加/是访问当前目录下的资源路径。
+
+没有/和./都是跳转到自己同目录下的页面，只有/跳转到整个网站目录下的
+有时候需要将button的标签改成input，button有时不好使
+
+iframe的用法，在需要包含其他页面的html中使用iframe标签，属性有name，src，width，height，scolling，等属性
+使用iframe的元素的时候，$(windows.frames["f"].document).find("#id").val()的方式。先去该元素，再对该元素进行赋值。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
