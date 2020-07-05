@@ -31,14 +31,22 @@ public class MedicalRecordController {
     @ResponseBody
     @RequestMapping("/update")
     public int update(String result,String finalresult,int pid){
+        System.out.println(result);
+        System.out.println(finalresult);
+        System.out.println(pid);
         MedicalRecord medicalRecord = new MedicalRecord();
-        medicalRecord.setResult(result);
-        medicalRecord.setFinalresult(finalresult);
-        medicalRecord.setPid(pid);
-        System.out.println(medicalRecord.getPid());
-        System.out.println(medicalRecord.getResult());
-        System.out.println(medicalRecord.getFinalresult());
-        return medicalRecordService.update(medicalRecord);
+        if(result!=null&&finalresult!=null){
+            System.out.println("hello");
+            medicalRecord.setResult(result);
+            medicalRecord.setFinalresult(finalresult);
+            medicalRecord.setPid(pid);
+            System.out.println(medicalRecord.getPid());
+            System.out.println(medicalRecord.getResult());
+            System.out.println(medicalRecord.getFinalresult());
+            return medicalRecordService.update(medicalRecord);
+        }
+        return -1;
+
     }
 
     @RequestMapping("/startMedicalRecord")

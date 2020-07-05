@@ -185,13 +185,15 @@ $(function () {
 			location.reload();
 		}else{
 			$.ajax({
-				url:"/Doctor/MedicalRecordController/startMedicalRecord",
+				url:"/Patient/PatientController/selectByPid",
 				data:"pid="+$("#pid").val(),
 				success:function (data) {
+					// alert(data.iirList[0].amount);
 					if(data.pid==-1){
 						alert("没查到！");
 						location.reload();
 					}else{
+						// alert(data.status);
 						$("#pno").val(data.pid);
 						$("#pname").val(data.pname);
 						if(data.sex=='男'){
@@ -210,6 +212,7 @@ $(function () {
 						$("#dname").val(data.doc.dname);
 						$("#deptname").val(data.dept.deptname);
 						$("#level").val(data.level.levelname);
+
 						if(data.medicalRecord!=null){
 							$("#description").val(data.medicalRecord.description);
 							$("#medicalhistory").val(data.medicalRecord.medicalhistory);
@@ -246,7 +249,7 @@ $(function () {
 
 						$("#submitItem").click(function () {
 							$.ajax({
-								url:"/MedicalRecordController/update",
+								url:"/Doctor/MedicalRecordController/update",
 								data:"result="+$("#result").val()+"&finalresult="+$("#finalresult").val()+"&pid="+$("#pno").val(),
 								// data:$("#form1").serialize(),
 								success:function (data) {
@@ -260,19 +263,6 @@ $(function () {
 								}
 							})
 						})
-
-
-						// if (data.pstatus=="已挂号"&&data.status==0){
-						// 	$("#refund").attr("disabled",false);
-						// 	$("#refund").css("color","blue");
-						// 	// $("#refund")[0].disabled=false;
-						// 	// $("#refund")[0].style.color="blue";
-						// }else{
-						// 	$("#refund").attr("disabled",true);
-						// 	$("#refund").css("color","grey");
-						// 	// $("#refund")[0].disabled=true;
-						// 	// $("#refund")[0].style.color="grey";
-						// }
 					}
 
 				}
