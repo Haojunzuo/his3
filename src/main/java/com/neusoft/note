@@ -95,6 +95,8 @@ json和自定义类用的都挺多，（ajax请求）
 iframe的用法，在需要包含其他页面的html中使用iframe标签，属性有name，src，width，height，scolling，等属性
 使用iframe的元素的时候，$(windows.frames["f"].document).find("#id").val()的方式。先去该元素，再对该元素进行赋值。
 
+git当前分支不是master的时候，可以提交到master，如果想要切换到master分支，则可以执行git repository branch checkout操作，即可回到master分支
+
 
 
 

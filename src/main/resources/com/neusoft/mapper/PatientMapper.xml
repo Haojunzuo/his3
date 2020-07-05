@@ -36,5 +36,7 @@
         <association property="dept" column="deptid" select="com.neusoft.mapper.DeptMapper.selectById"/>
         <association property="doc" column="doctorid" select="com.neusoft.mapper.DoctorMapper.selectById"/>
         <association property="medicalRecord" column="pid" select="com.neusoft.mapper.MedicalRecordMapper.selectByPid"/>
+        <collection property="cirList" column="pid" select="com.neusoft.mapper.CheckItemRecordMapper.selectByPid"></collection>
+        <collection property="iirList" column="pid" select="com.neusoft.mapper.InspectItemRecordMapper.selectByPid"></collection>
     </resultMap>
 </mapper>

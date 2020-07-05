@@ -1,167 +1,164 @@
 $(function(){
-	//点击search图标，查询患者信息和收费列表
-	$("#search").click(function(){
-		var pid = $("#pid").val();
-		if(pid==""){
-			alert("请输入要查询的病历号");
-		}else if(isNaN(pid)){
-			alert("病历号必须为数字");
+
+	$("#search").click(function () {
+		var flag=0;
+		if($("#pid").val()==''){
+			alert("您没有要查找的病历号！");
+			location.reload()
+		}else if(isNaN($("#pid").val())==true){
+			alert("对不起，病历号必须是数字！");
+			location.reload();
 		}else{
 			$.ajax({
-				type:"post",
-				url:"selectPatientByPno/"+$("#pid").val(),
-				data:{},
-				dataType:"json",
-				success:function(data){
-					console.log(data);
-					if(data.pid==0){
-						alert("系统中不存在该患者");
+				url:"/Patient/PatientController/selectByPid",
+				data:"pid="+$("#pid").val(),
+				success:function (data) {
+					// alert(data.iirList[0].amount);
+					if(data.pid==-1){
+						alert("没查到！");
+						location.reload();
 					}else{
 						$("#pno").val(data.pid);
 						$("#pname").val(data.pname);
-						if(data.sex=="男"){
-							$("#sex1")[0].checked=true;
+						if(data.sex=='男'){
+							$("input[name='sex']:eq(0)").prop("checked",true);//也可以用$("#sex0")[0].checked=true;
 						}else{
-							$("#sex0")[0].checked=true;
+							$("input[name='sex']:eq(1)").prop("checked",true);
 						}
 						$("#createdate").val(data.createDate);
 						$("#idcard").val(data.idcard);
-						$("#level").val(data.level.levelname);
-						if(data.pstatus=="未看诊" || data.pstatus=="已退号"){
-							$("#pstatus").html("否");
+						$("#pstatus").text(data.pstatus);
+						if(data.status==0){
+							$("#status").text("未就诊");
 						}else{
-							$("#pstatus").html("是");
+							$("#status").text("已就诊");
 						}
-						if(data.pstatus=="已退号"){
-							$("#status").html("已退号");
-						}else{
-							$("#status").html("正常");
-						}
-						$("#deptname").val(data.dept.deptname);
 						$("#dname").val(data.doc.dname);
-						
-						//清空表格中已有的记录
+						$("#deptname").val(data.dept.deptname);
+						$("#level").val(data.level.levelname);
+
 						$("#item_data tr:not(:first)").empty();
-						
-						var totalPay=0;
-						
+						var totalPay = 0;
 						//追加检查申请的记录
-						for(var i=0;i<data.cirList.length;i++){
+						for(var i=0; i<data.cirList.length; i++){
 							var pstatus;
-							if(data.cirList[i].paystatus==0){
-								pstatus="未缴费";
-								$("#item_data").append("<tr><td><input type='checkbox'  name='cid' value='"+data.cirList[i].id+"'     class='chk'  ></td>" +
-										"<td>"+data.cirList[i].checkItem.itemname+"</td>" +
-										"<td>"+data.cirList[i].checkItem.price+"</td>" +
-										"<td>"+data.cirList[i].amount+"</td>" +
-												"<td class='payCount'  >"+(data.cirList[i].checkItem.price * data.cirList[i].amount) +"</td>" +
-												"<td>"+pstatus+"</td></tr>");
+							if (data.cirList[i].paystatus==0){
+								pstatus = "未缴费";
+								$("#item_data").append("<tr><td><input type='checkbox' name='cid' value='"+data.cirList[i].id+"' class='chk'></td>"+
+									"<td>"+data.cirList[i].checkItem.itemname+"</td>"+
+									"<td>"+data.cirList[i].amount+"</td>"+
+									"<td>"+1+"</td>"+
+									"<td class='payCount'>"+data.cirList[i].amount+"</td>"+
+									"<td>"+pstatus+"</td>"+
+								"</tr>")
 							}else{
-								pstatus="已缴费";
-								$("#item_data").append("<tr><td><input type='checkbox'  disabled   class='chk'  ></td>" +
-										"<td>"+data.cirList[i].checkItem.itemname+"</td>" +
-										"<td>"+data.cirList[i].checkItem.price+"</td>" +
-										"<td>"+data.cirList[i].amount+"</td>" +
-												"<td>"+(data.cirList[i].checkItem.price * data.cirList[i].amount) +"</td>" +
-												"<td>"+pstatus+"</td></tr>");
+								pstatus = "已缴费";
+								$("#item_data").append("<tr><td><input type='checkbox' disabled class='chk'></td>" +
+									"<td>"+data.cirList[i].checkItem.itemname+"</td>" +
+									"<td>"+data.cirList[i].amount+"</td>" +
+									"<td>"+1+"</td>" +
+									"<td>"+data.cirList[i].amount+"</td>" +
+									"<td>"+pstatus+"</td></tr>")
 							}
-							
-							
-							totalPay = totalPay + (data.cirList[i].checkItem.price * data.cirList[i].amount);
+								totalPay = totalPay + data.cirList[i].amount;
 						}
+
 						//追加检验申请的记录
-						for(var i=0;i<data.iirList.length;i++){
+						for(var i=0; i<data.iirList.length; i++){
 							var pstatus;
-							if(data.cirList[i].paystatus==0){
-								pstatus="未缴费";
-								$("#item_data").append("<tr><td><input type='checkbox' name='iid' value='"+data.iirList[i].id+"'    class='chk'  ></td>" +
-										"<td>"+data.iirList[i].inspectItem.inspectname+"</td>" +
-										"<td>"+data.iirList[i].inspectItem.price+"</td>" +
-										"<td>"+data.iirList[i].amount+"</td>" +
-												"<td class='payCount'  >"+(data.iirList[i].inspectItem.price * data.iirList[i].amount)+"</td>" +
-												"<td>"+pstatus+"</td></tr>");
+							if (data.iirList[i].paystatus==0){
+								pstatus = "未缴费";
+								$("#item_data").append("<tr><td><input type='checkbox' name='iid' value='"+data.iirList[i].id+"' class='chk'></td>"+
+									"<td>"+data.iirList[i].inspectItem.inspectname+"</td>"+
+									"<td>"+data.iirList[i].amount+"</td>"+
+									"<td>"+1+"</td>"+
+									"<td class='payCount'>"+data.iirList[i].amount+"</td>"+
+									"<td>"+pstatus+"</td>"+
+									"</tr>")
 							}else{
-								pstatus="已缴费";
-								$("#item_data").append("<tr><td><input type='checkbox'  disabled  class='chk'  ></td>" +
-										"<td>"+data.iirList[i].inspectItem.inspectname+"</td>" +
-										"<td>"+data.iirList[i].inspectItem.price+"</td>" +
-										"<td>"+data.iirList[i].amount+"</td>" +
-												"<td>"+(data.iirList[i].inspectItem.price * data.iirList[i].amount)+"</td>" +
-												"<td>"+pstatus+"</td></tr>");
+								pstatus = "已缴费";
+								$("#item_data").append("<tr><td><input type='checkbox' disabled class='chk'></td>" +
+									"<td>"+data.iirList[i].inspectItem.inspectname+"</td>" +
+									"<td>"+data.iirList[i].inspectItem.price+"</td>" +
+									"<td>"+1+"</td>" +
+									"<td>"+data.iirList[i].inspectItem.price+"</td>" +
+									"<td>"+pstatus+"</td></td></tr>")
 							}
-							
-							totalPay = totalPay +(data.iirList[i].inspectItem.price * data.iirList[i].amount);
+							totalPay = totalPay + data.iirList[i].amount;
 						}
-						//将总金额显示在页面上
 						$("#totalPay").html(totalPay);
+
 					}
+
 				}
-			});
+			})
 		}
+
 	});
-	
-	
-	//复选框全选
-	$("#selectAll").click(function(){
-		var chks =$(".chk");
-		var payCountTd = $(".payCount");
+
+	$("#selectAll").click(function () {
+		var chks = $(".chk");
+		var payCountId = $(".payCount");
 		var total=0;
 		if($(this)[0].checked==true){
-			for(var i=0;i<chks.length;i++){
-				chks[i].checked = true;
+			for(var i=0; i<chks.length; i++){
+				chks[i].checked=true;
 			}
-			for(var j=0;j<payCountTd.length;j++){
-				total = total + parseFloat($(payCountTd[j]).html());
+			for(var j=0; j<payCountId.length; j++){
+				total = total+parseFloat($(payCountId[j]).html());
 			}
 			$("#currentPay").html(total);
 		}else{
-			for(var i=0;i<chks.length;i++){
+			for(var i=0; i<chks.length; i++){
 				chks[i].checked = false;
 			}
 			$("#currentPay").html(0);
 		}
 	});
-	
 	//在每一行的复选框上绑定单击事件
-	$(document).on("click",".chk",function(){
+	$(document).on("click",".chk",function () {
 		//当前的应收金额
 		var currentPay = $("#currentPay").html();
 		//操作行对应的金额
 		var pay = $(this).parent().next().next().next().next().html();
 		if($(this)[0].checked==true){
-			$("#currentPay").html(parseFloat(currentPay) + parseFloat(pay));
+			$("#currentPay").html(parseFloat(currentPay)+parseFloat(pay));
 		}else{
-			$("#currentPay").html(parseFloat(currentPay) - parseFloat(pay));
+			$("#currentPay").html(parseFloat(currentPay)-parseFloat(pay));
 		}
 	});
-	
+
 	//收费
-	$("#submitItem").click(function(){
-		var chks =$(".chk");
+	$("#submitItem").click(function () {
+		var chks = $(".chk");
 		var flag = false;
-		for(var k=0;k<chks.length;k++){
-			if(chks[k].checked == true){
+		for (var k=0; k<chks.length; k++){
+			if(chks[k].checked==true){
 				flag = true;
 				break;
 			}
 		}
-		//判断是否有选中的复选框
 		if(!flag){
-			alert("请选择要交费的记录");
+			alert("请选择要缴费的记录");
 		}else{
 			$.ajax({
 				type:"post",
-				url:"payItems",
-				data:$("#form1").serialize(),
-				dataType:"json",
-				success:function(data){
-					console.log(data);
-					alert(data.result);
+				url:"/PayController/doPay",
+				data: $("#form1").serialize(),
+				// dataType:"json",
+				success:function (data) {
+					if (data=="yes"){
+						alert("恭喜，缴费成功");
+					}else{
+						alert("对不起，缴费失败");
+					}
 					location.reload();
+
 				}
-			});
+			})
 		}
-	})
+	});
+
 
 	//进入挂号页面
 	$("#div1_1").click(function(){
@@ -178,7 +175,202 @@ $(function(){
 	$("#refund").click(function(){
 		location.href="/Patient/PatientController/startRefundPatient";
 	});
-	
-})
+});
+
+
+
+
+
+
+
+
+//
+//
+// $(function(){
+// 	//点击search图标，查询患者信息和收费列表
+// 	$("#search").click(function(){
+// 		var pid = $("#pid").val();
+// 		if(pid==""){
+// 			alert("请输入要查询的病历号");
+// 		}else if(isNaN(pid)){
+// 			alert("病历号必须为数字");
+// 		}else{
+// 			$.ajax({
+// 				type:"post",
+// 				url:"selectPatientByPno/"+$("#pid").val(),
+// 				data:{},
+// 				dataType:"json",
+// 				success:function(data){
+// 					console.log(data);
+// 					if(data.pid==0){
+// 						alert("系统中不存在该患者");
+// 					}else{
+// 						$("#pno").val(data.pid);
+// 						$("#pname").val(data.pname);
+// 						if(data.sex=="男"){
+// 							$("#sex1")[0].checked=true;
+// 						}else{
+// 							$("#sex0")[0].checked=true;
+// 						}
+// 						$("#createdate").val(data.createDate);
+// 						$("#idcard").val(data.idcard);
+// 						$("#level").val(data.level.levelname);
+// 						if(data.pstatus=="未看诊" || data.pstatus=="已退号"){
+// 							$("#pstatus").html("否");
+// 						}else{
+// 							$("#pstatus").html("是");
+// 						}
+// 						if(data.pstatus=="已退号"){
+// 							$("#status").html("已退号");
+// 						}else{
+// 							$("#status").html("正常");
+// 						}
+// 						$("#deptname").val(data.dept.deptname);
+// 						$("#dname").val(data.doc.dname);
+//
+// 						//清空表格中已有的记录
+// 						$("#item_data tr:not(:first)").empty();
+//
+// 						var totalPay=0;
+//
+// 						//追加检查申请的记录
+// 						for(var i=0;i<data.cirList.length;i++){
+// 							var pstatus;
+// 							if(data.cirList[i].paystatus==0){
+// 								pstatus="未缴费";
+// 								$("#item_data").append("<tr><td><input type='checkbox'  name='cid' value='"+data.cirList[i].id+"'     class='chk'  ></td>" +
+// 										"<td>"+data.cirList[i].checkItem.itemname+"</td>" +
+// 										"<td>"+data.cirList[i].checkItem.price+"</td>" +
+// 										"<td>"+data.cirList[i].amount+"</td>" +
+// 												"<td class='payCount'  >"+(data.cirList[i].checkItem.price * data.cirList[i].amount) +"</td>" +
+// 												"<td>"+pstatus+"</td></tr>");
+// 							}else{
+// 								pstatus="已缴费";
+// 								$("#item_data").append("<tr><td><input type='checkbox'  disabled   class='chk'  ></td>" +
+// 										"<td>"+data.cirList[i].checkItem.itemname+"</td>" +
+// 										"<td>"+data.cirList[i].checkItem.price+"</td>" +
+// 										"<td>"+data.cirList[i].amount+"</td>" +
+// 												"<td>"+(data.cirList[i].checkItem.price * data.cirList[i].amount) +"</td>" +
+// 												"<td>"+pstatus+"</td></tr>");
+// 							}
+//
+//
+// 							totalPay = totalPay + (data.cirList[i].checkItem.price * data.cirList[i].amount);
+// 						}
+// 						//追加检验申请的记录
+// 						for(var i=0;i<data.iirList.length;i++){
+// 							var pstatus;
+// 							if(data.cirList[i].paystatus==0){
+// 								pstatus="未缴费";
+// 								$("#item_data").append("<tr><td><input type='checkbox' name='iid' value='"+data.iirList[i].id+"'    class='chk'  ></td>" +
+// 										"<td>"+data.iirList[i].inspectItem.inspectname+"</td>" +
+// 										"<td>"+data.iirList[i].inspectItem.price+"</td>" +
+// 										"<td>"+data.iirList[i].amount+"</td>" +
+// 												"<td class='payCount'  >"+(data.iirList[i].inspectItem.price * data.iirList[i].amount)+"</td>" +
+// 												"<td>"+pstatus+"</td></tr>");
+// 							}else{
+// 								pstatus="已缴费";
+// 								$("#item_data").append("<tr><td><input type='checkbox'  disabled  class='chk'  ></td>" +
+// 										"<td>"+data.iirList[i].inspectItem.inspectname+"</td>" +
+// 										"<td>"+data.iirList[i].inspectItem.price+"</td>" +
+// 										"<td>"+data.iirList[i].amount+"</td>" +
+// 												"<td>"+(data.iirList[i].inspectItem.price * data.iirList[i].amount)+"</td>" +
+// 												"<td>"+pstatus+"</td></tr>");
+// 							}
+//
+// 							totalPay = totalPay +(data.iirList[i].inspectItem.price * data.iirList[i].amount);
+// 						}
+// 						//将总金额显示在页面上
+// 						$("#totalPay").html(totalPay);
+// 					}
+// 				}
+// 			});
+// 		}
+// 	});
+//
+//
+// 	//复选框全选
+// 	$("#selectAll").click(function(){
+// 		var chks =$(".chk");
+// 		var payCountTd = $(".payCount");
+// 		var total=0;
+// 		if($(this)[0].checked==true){
+// 			for(var i=0;i<chks.length;i++){
+// 				chks[i].checked = true;
+// 			}
+// 			for(var j=0;j<payCountTd.length;j++){
+// 				total = total + parseFloat($(payCountTd[j]).html());
+// 			}
+// 			$("#currentPay").html(total);
+// 		}else{
+// 			for(var i=0;i<chks.length;i++){
+// 				chks[i].checked = false;
+// 			}
+// 			$("#currentPay").html(0);
+// 		}
+// 	});
+//
+// 	//在每一行的复选框上绑定单击事件
+// 	$(document).on("click",".chk",function(){
+// 		//当前的应收金额
+// 		var currentPay = $("#currentPay").html();
+// 		//操作行对应的金额
+// 		var pay = $(this).parent().next().next().next().next().html();
+// 		if($(this)[0].checked==true){
+// 			$("#currentPay").html(parseFloat(currentPay) + parseFloat(pay));
+// 		}else{
+// 			$("#currentPay").html(parseFloat(currentPay) - parseFloat(pay));
+// 		}
+// 	});
+//
+// 	//收费
+// 	$("#submitItem").click(function(){
+// 		var chks =$(".chk");
+// 		var flag = false;
+// 		for(var k=0;k<chks.length;k++){
+// 			if(chks[k].checked == true){
+// 				flag = true;
+// 				break;
+// 			}
+// 		}
+// 		//判断是否有选中的复选框
+// 		if(!flag){
+// 			alert("请选择要交费的记录");
+// 		}else{
+// 			$.ajax({
+// 				type:"post",
+// 				url:"payItems",
+// 				data:$("#form1").serialize(),
+// 				dataType:"json",
+// 				success:function(data){
+// 					console.log(data);
+// 					alert(data.result);
+// 					location.reload();
+// 				}
+// 			});
+// 		}
+// 	})
+//
+//
+//
+//
+//
+// 	//进入挂号页面
+// 	$("#div1_1").click(function(){
+// 		location.href="/Patient/PatientController/startPatient";
+// 	});
+//
+//
+// 	//点击门诊收费管理进入收费页面
+// 	$("#div1_2").click(function(){
+// 		location.href="/outpatient_pay.html";
+// 	});
+//
+// 	//点击退号管理进入退号页面
+// 	$("#refund").click(function(){
+// 		location.href="/Patient/PatientController/startRefundPatient";
+// 	});
+//
+// })
 
 

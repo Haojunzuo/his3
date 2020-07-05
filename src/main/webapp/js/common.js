@@ -25,6 +25,7 @@ $(function(){
 				url:"/Patient/PatientController/selectByPid",
 				data:"pid="+$("#pid").val(),
 				success:function (data) {
+					// alert(data.iirList[0].amount);
 					if(data.pid==-1){
 						alert("没查到！");
 						location.reload();

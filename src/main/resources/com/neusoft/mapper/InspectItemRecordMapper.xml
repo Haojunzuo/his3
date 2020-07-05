@@ -9,4 +9,18 @@
     <select id="select" resultType="InspectItemRecord" parameterType="InspectItemRecord">
         select * from inspectitemrecord where pid=#{pid} and inspectid=#{inspectid}
     </select>
+    <select id="selectByPid" resultMap="myMap3" parameterType="int">
+        select * from inspectitemrecord where pid=#{pid}
+    </select>
+    <update id="updatePayStatus" parameterType="int">
+        update inspectitemrecord set paystatus=1 where id=#{id}
+    </update>
+    <resultMap id="myMap3" type="InspectItemRecord">
+        <id property="id" column="id"></id>
+        <result property="pid" column="pid"></result>
+        <result property="inspectid" column="inspectid"></result>
+        <result property="amount" column="amount"></result>
+        <result property="paystatus" column="paystatus"></result>
+        <association property="inspectItem" column="inspectid" select="com.neusoft.mapper.InspectItemMapper.selectById"></association>
+    </resultMap>
 </mapper>

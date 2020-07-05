@@ -18,5 +18,8 @@ public class CheckitemRecordService {
         }
         return row;
     }
+    public int updatePayStatus(int id){
+        return checkItemRecordMapper.updatePayStatus(id);
+    }
 
 }

@@ -9,4 +9,18 @@
     <select id="select" resultType="CheckItemRecord" parameterType="CheckItemRecord">
         select * from checkitemrecord where pid=#{pid} and cid=#{cid}
     </select>
+    <select id="selectByPid" resultMap="myMap2" parameterType="int">
+        select * from checkitemrecord where pid=#{pid}
+    </select>
+    <update id="updatePayStatus" parameterType="int">
+        update checkitemrecord set paystatus=1 where id=#{id}
+    </update>
+    <resultMap id="myMap2" type="CheckItemRecord">
+        <id property="id" column="id"></id>
+        <result property="pid" column="pid"></result>
+        <result property="cid" column="cid"></result>
+        <result property="amount" column="amount"></result>
+        <result property="paystatus" column="paystatus"></result>
+        <association property="checkItem" column="cid" select="com.neusoft.mapper.CheckItemMapper.selectById"></association>
+    </resultMap>
 </mapper>

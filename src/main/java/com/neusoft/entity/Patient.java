@@ -2,6 +2,7 @@ package com.neusoft.entity;
 
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.util.List;
 
 public class Patient {
     private int pid;
@@ -25,6 +26,11 @@ public class Patient {
     private Doctor doc;
     private Level level;
     private MedicalRecord medicalRecord;
+    private List<CheckItemRecord> cirList;
+    private List<InspectItemRecord> iirList;
+
+//    private CheckItemRecordList cirList;
+//    private InspectItemRecordList iirList;
 
     public Date getOperateDate() {
         return operateDate;
@@ -66,22 +72,37 @@ public class Patient {
         this.medicalRecord = medicalRecord;
     }
 
-    //    private int pid;
-//    private String pname;
-//    private String sex;
-//    private int age;
-//    private java.sql.Date birthday;
-//    private String idcard;
-//    private String address;
-//    private int levelid;
-//    private int deptid;
-//    private int doctorid;
-//    private java.sql.Date createDate;
-//    private int cost;
-//    private String pstatus;
-//    private int status;
-//    private int operator;
-//    private java.sql.Date operateDate;
+    public List<CheckItemRecord> getCirList() {
+        return cirList;
+    }
+
+    public void setCirList(List<CheckItemRecord> cirList) {
+        this.cirList = cirList;
+    }
+
+    public List<InspectItemRecord> getIirList() {
+        return iirList;
+    }
+
+    public void setIirList(List<InspectItemRecord> iirList) {
+        this.iirList = iirList;
+    }
+    //    public CheckItemRecordList getCirList() {
+//        return cirList;
+//    }
+//
+//    public void setCirList(CheckItemRecordList cirList) {
+//        this.cirList = cirList;
+//    }
+//
+//    public InspectItemRecordList getIirList() {
+//        return iirList;
+//    }
+//
+//    public void setIirList(InspectItemRecordList iirList) {
+//        this.iirList = iirList;
+//    }
+
     public int getPid() {
         return pid;
     }

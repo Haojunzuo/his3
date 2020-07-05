@@ -17,5 +17,8 @@ public class InspectItemRecordService {
         }
         return row;
     }
+    public int updatePayStatus(int id){
+        return inspectItemRecordMapper.updatePayStatus(id);
+    }
 
 }

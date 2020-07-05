@@ -6,4 +6,7 @@
     <select id="selectAll" resultType="CheckItem">
         select * from checkitem
     </select>
+    <select id="selectById" resultType="CheckItem" parameterType="int">
+        select * from checkitem where id=#{cid}
+    </select>
 </mapper>

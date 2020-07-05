@@ -6,4 +6,7 @@
     <select id="selectAll" resultType="InspectItem">
         select * from inspectitem
     </select>
+    <select id="selectById" resultType="InspectItem">
+        select * from inspectitem where id=#{id}
+    </select>
 </mapper>
