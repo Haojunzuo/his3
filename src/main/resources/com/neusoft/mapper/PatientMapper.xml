@@ -25,6 +25,9 @@
     <update id="updateStatus" parameterType="int">
 		update patient set status=1 where pid=#{pid}
 	</update>
+    <select id="getPatientData" resultMap="myMap" parameterType="int">
+        select * from patient limit #{index},#{pagesize}
+    </select>
     <resultMap id="myMap" type="Patient">
         <id property="pid" column="pid"></id>
         <result property="sex" column="sex"></result>

@@ -11,6 +11,11 @@ import java.util.List;
 public class PatientService {
     @Resource
     private PatientMapper patientMapper;
+
+    public List<Patient> getPatientData(int pagenum, int pagesize) {
+        return patientMapper.getPatientData((pagenum-1)*pagesize,pagesize);
+    }
+
     public List<Patient> selectPatients(Integer status){
         return patientMapper.selectPatients(status);
     }

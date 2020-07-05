@@ -46,11 +46,12 @@ public class PatientController {
     //门诊管理员的第一个页面（挂号）的入口
     @RequestMapping("/startPatient")
     public String startPatient(Model model){
-        List<Patient> patients = patientService.selectAll();
+        List<Patient> patients = patientService.getPatientData(1,2);
         model.addAttribute("patients",patients);
         return "/outpatient_register.html";
-
     }
+
+
     @ResponseBody
     @RequestMapping("/selectByPid")
     public Patient selectByPid(Integer pid){
@@ -99,4 +100,10 @@ public class PatientController {
         return patientService.refund(pid);
     }
 
+    @ResponseBody
+    @RequestMapping("/getPatientData")
+//    public List<Patient> getPatientData(@RequestParam("pagenum") int pagenum,@RequestParam("pagesize") int pagesize){
+        public List<Patient> getPatientData(int pagenum,int pagesize){
+        return patientService.getPatientData(pagenum,pagesize);
+    }
 }

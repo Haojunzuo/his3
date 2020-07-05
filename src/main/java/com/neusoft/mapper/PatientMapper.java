@@ -16,4 +16,6 @@ public interface PatientMapper {
     public List<Patient> select2(String dname);
 
     int updateStatus(Integer pid);
+
+    List<Patient> getPatientData(int index, int pagesize);
 }

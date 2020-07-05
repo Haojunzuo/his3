@@ -296,10 +296,82 @@ $(function () {
 				}
 			}
 		})
-	})
+	});
 	$("#refresh").click(function () {
 		location.reload();
+	});
+
+
+
+
+	//查询患者信息，每页显示2条，显示第一页的数据
+	var pagesize=2;
+	var pagenum=1;
+	getPageData();
+
+	//刷新
+	$("#div4_1").click(function(){
+		pagenum=1;
+		getPageData();
+		$("#pnum").html(1);
 	})
+
+	//上一页
+	$("#last").click(function(){
+		if(pagenum-1==0){
+			alert("没有上一页数据");
+		}else{
+			pagenum=pagenum-1;
+			getPageData();
+			if(pagenum==1){
+				$("#pnum").html(parseInt($("#pnum").html())-1);
+			}else{
+				$("#pnum").html(parseInt($("#pnum").html())-2);
+			}
+
+		}
+	})
+	//下一页
+	$("#next").click(function(){
+		pagenum=pagenum+1;
+		getPageData();
+		//$("#pnum").html(parseInt($("#pnum").html())+1);
+	})
+
+	function  getPageData(){
+		$.ajax({
+			type:"post",
+			url:"/Patient/PatientController/getPatientData",
+			data:"pagenum="+pagenum+"&pagesize="+pagesize,
+			dataType:"json",
+			success:function(data){
+				console.log(data);
+				//如果不是第一页，没有查询到数据
+				if(pagenum>1 && data.length>0){
+					$("#pnum").html(parseInt($("#pnum").html())+1);
+				}
+				if(pagenum>1 && data.length==0){
+					pagenum=pagenum-1;
+					alert("没有更多数据了");
+				}else{
+					$("#data_table tr:not(:first)").empty();
+					for(var i=0;i<data.length;i++){
+						var status="";
+						if(data[i].status==0){
+							status = "未就诊";
+						}else{
+							status = "已就诊";
+						}
+
+						$("#data_table").append("<tr><td>"+data[i].pid+"</td><td>"+data[i].pname+"</td><td>"+data[i].sex+"</td>" +
+							"<td>"+data[i].idcard+"</td><td>"+data[i].createDate+"</td><td>"+data[i].level.levelname+"</td>" +
+							"<td>"+status+"</td><td>"+data[i].pstatus+"</td><td>"+data[i].dept.deptname+"</td><td>"+data[i].doc.dname+"</td></tr>")
+					}
+				}
+			}
+		});
+
+	}
 
 
 

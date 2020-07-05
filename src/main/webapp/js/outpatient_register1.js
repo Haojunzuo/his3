@@ -87,10 +87,10 @@ $(function(){
 					$("#data_table tr:not(:first)").empty();
 					for(var i=0;i<data.length;i++){
 						var status="";
-						if(data[i].pstatus=="已退号"){
-							status = "已退号";
+						if(data[i].status==0){
+							status = "未就诊";
 						}else{
-							status = "正常";
+							status = "已就诊";
 						}
 						$("#data_table").append("<tr><td>"+data[i].pid+"</td><td>"+data[i].pname+"</td><td>"+data[i].sex+"</td>" +
 								"<td>"+data[i].idcard+"</td><td>"+data[i].createDate+"</td><td>"+data[i].level.levelname+"</td>" +
