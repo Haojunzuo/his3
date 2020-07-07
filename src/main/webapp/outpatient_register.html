@@ -119,21 +119,21 @@
 					<th>看诊科室</th>
 					<th>看诊医生</th>
 				</tr>
-				<tr th:each="patient:${patients}">
-					<td th:text="${patient.pid}"></td>
-					<td th:text="${patient.pname}"></td>
-					<td th:text="${patient.sex}"></td>
-					<td th:text="${patient.idcard}"></td>
-					<td th:text="${patient.createDate}"></td>
-					<td th:text="${patient.level.levelname}"></td>
-					<td>
-						<span th:if="${patient.status==0}" th:text="否"></span>
-						<span th:if="${patient.status==1}" th:text="是"></span>
-					</td>
-					<td th:text="${patient.pstatus}"></td>
-					<td th:text="${patient.dept.deptname}"></td>
-					<td th:text="${patient.doc.dname}"></td>
-				</tr>
+<!--				<tr th:each="patient:${patients}">-->
+<!--					<td th:text="${patient.pid}"></td>-->
+<!--					<td th:text="${patient.pname}"></td>-->
+<!--					<td th:text="${patient.sex}"></td>-->
+<!--					<td th:text="${patient.idcard}"></td>-->
+<!--					<td th:text="${patient.createDate}"></td>-->
+<!--					<td th:text="${patient.level.levelname}"></td>-->
+<!--					<td>-->
+<!--						<span th:if="${patient.status==0}" th:text="否"></span>-->
+<!--						<span th:if="${patient.status==1}" th:text="是"></span>-->
+<!--					</td>-->
+<!--					<td th:text="${patient.pstatus}"></td>-->
+<!--					<td th:text="${patient.dept.deptname}"></td>-->
+<!--					<td th:text="${patient.doc.dname}"></td>-->
+<!--				</tr>-->
 				
 			</table>
 		</div>

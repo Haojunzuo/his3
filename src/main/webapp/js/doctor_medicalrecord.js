@@ -6,12 +6,12 @@ $(function(){
 	
 	//点击检验申请进入下一页面
 	$("#div1_3").click(function(){
-		location.href="/doctor_inspectitem.html";
+		location.href="/Doctor/InspectItemController/startInspectItem";
 	});
 	
 	//点击确诊进入确诊页面
 	$("#div1_4").click(function(){
-		location.href="/doctor_result.html";
+		location.href="/Doctor/MedicalRecordController/startLast";
 	});
 	$("#goback").click(function () {
 		location.href="/login.html";
@@ -51,7 +51,7 @@ function myPid(info) {
 		location.reload();
 	}else{
 		$.ajax({
-			url:"/Patient/PatientController/selectByPid",
+			url:"/Patient/PatientController/selectByPid1",
 			data:"pid="+$(info).text(),
 			success:function (data) {
 				if(data.pid==-1){

@@ -67,6 +67,7 @@ $(function () {
 
 
 
+	//进入病例页面
 	$("#div1_1").click(function(){
 		// location.href="doctor_medicalrecord.jsp";
 		location.href ="/Doctor/MedicalRecordController/startMedicalRecord";
@@ -79,7 +80,7 @@ $(function () {
 
 	//点击确诊进入确诊页面
 	$("#div1_4").click(function(){
-		location.href="doctor_result.html";
+		location.href="/Doctor/MedicalRecordController/startLast";
 	})
 })
 

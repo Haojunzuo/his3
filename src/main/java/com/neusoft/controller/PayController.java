@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
-@RequestMapping("/PayController")
+@RequestMapping("/Patient/PayController")
 public class PayController {
 
     @Autowired
@@ -24,7 +24,7 @@ public class PayController {
     private InspectItemRecordService inspectItemRecordService;
     @RequestMapping("/startPay")
     public String startPay(){
-        return "/outpatient_pay";
+        return "/outpatient_pay.html";
     }
 
     @RequestMapping("/doPay")

@@ -7,7 +7,6 @@ import java.util.List;
 @Mapper
 public interface PatientMapper {
     public List<Patient> selectPatients(Integer status);
-    public Patient selectPatientById(Integer pid);
     public int insert(Patient patient);
     public Patient selectByPid(Integer id);
     public List<Patient> selectAll();
@@ -18,4 +17,5 @@ public interface PatientMapper {
     int updateStatus(Integer pid);
 
     List<Patient> getPatientData(int index, int pagesize);
+
 }

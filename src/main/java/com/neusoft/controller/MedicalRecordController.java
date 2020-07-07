@@ -28,21 +28,25 @@ public class MedicalRecordController {
     private PatientService patientService;
 
 
+    @RequestMapping("/startLast")
+    public String startLast(){
+        return "/doctor_result.html";
+    }
     @ResponseBody
     @RequestMapping("/update")
     public int update(String result,String finalresult,int pid){
-        System.out.println(result);
-        System.out.println(finalresult);
-        System.out.println(pid);
+//        System.out.println(result);
+//        System.out.println(finalresult);
+//        System.out.println(pid);
         MedicalRecord medicalRecord = new MedicalRecord();
         if(result!=null&&finalresult!=null){
             System.out.println("hello");
             medicalRecord.setResult(result);
             medicalRecord.setFinalresult(finalresult);
             medicalRecord.setPid(pid);
-            System.out.println(medicalRecord.getPid());
-            System.out.println(medicalRecord.getResult());
-            System.out.println(medicalRecord.getFinalresult());
+//            System.out.println(medicalRecord.getPid());
+//            System.out.println(medicalRecord.getResult());
+//            System.out.println(medicalRecord.getFinalresult());
             return medicalRecordService.update(medicalRecord);
         }
         return -1;
@@ -76,6 +80,13 @@ public class MedicalRecordController {
             userid = u.getUserid();
             m.setOperator(userid);
         }
-        return medicalRecordService.createMedicalRecord(m);
+        String info = null;
+        try {
+            info = medicalRecordService.createMedicalRecord(m);
+        } catch (Exception e) {
+            System.out.println("eeee");
+            info = "no";
+        }
+        return info;
     }
 }

@@ -97,8 +97,17 @@ iframe的用法，在需要包含其他页面的html中使用iframe标签，属�
 
 git当前分支不是master的时候，可以提交到master，如果想要切换到master分支，则可以执行git repository branch checkout操作，即可回到master分支
 
+registry.addInterceptor(new MyInterceptors2()).addPathPatterns("/**").excludePathPatterns("/user/login","index.html");
 
+validation 生效，批准，确认。
+HTTP400错误： bad request  意思是“错误的请求”
+invalid hostname  意思是 “不存在的域名”
+产生HTTP400错误原因：前端提交数据的字段名称或者是字段类型和后台的实体类不一致。
+前端提交到后台的数据应该是json字符串类型，前端没有将对象转换为对象类型。
 
+propagation 传播，扩展  spring定义了七种扩散级别，
+
+$("#tableId tr:not(:first):not(:last)").html("");
 
 
 

@@ -45,31 +45,53 @@ public class PatientController {
 
     //门诊管理员的第一个页面（挂号）的入口
     @RequestMapping("/startPatient")
-    public String startPatient(Model model){
-        List<Patient> patients = patientService.getPatientData(1,2);
-        model.addAttribute("patients",patients);
+    public String startPatient(Model model) {
+//        List<Patient> patients = patientService.getPatientData(1,2);
+//        model.addAttribute("patients",patients);
         return "/outpatient_register.html";
     }
 
-
     @ResponseBody
     @RequestMapping("/selectByPid")
-    public Patient selectByPid(Integer pid){
+    public Patient selectByPid(Integer pid) {
         Patient p = patientService.selectByPid(pid);
-        if(p==null){
+        if (p == null) {
             p = new Patient();
             p.setPid(-1);
         }
         return p;
     }
 
+    @ResponseBody
+    @RequestMapping("/selectByPid1")
+    public Patient selectByPid1(Integer pid, HttpSession session) {
+        Patient patient = patientService.selectByPid(pid);
+        if (patient != null && patient.getDoc() != null) {
+            String dname = patient.getDoc().getDname();
+            User user = (User) session.getAttribute("user");
+            if (dname.equals(user.getUsername())) {
+                Patient p = patientService.selectByPid(pid);
+                if (p == null) {
+                    p = new Patient();
+                    p.setPid(-1);
+                }
+                return p;
+            }
+        } else {
+            patient = new Patient();
+        }
+
+        patient.setPid(-1);
+        return patient;
+    }
+
     @RequestMapping("/insert")
     @ResponseBody
-    public String insert(Patient p, HttpSession session){
+    public String insert(Patient p, HttpSession session) {
         User u = (User) session.getAttribute("user");
         System.out.println(p.getPname());
         System.out.println(p.getBirthday());
-        if(u!=null){
+        if (u != null) {
             p.setOperator(u.getUserid());
             System.out.println(u.getRole());
             try {
@@ -78,24 +100,26 @@ public class PatientController {
                 return "no";
             }
             return "yes";
-        }else{
+        } else {
             return "no";
         }
     }
+
     @RequestMapping("startRefundPatient")
-    public String startRefundPatient(){
+    public String startRefundPatient() {
 
         return "/outpatient_refund.html";
     }
+
     @ResponseBody
     @RequestMapping("/selectAll")
-    public List<Patient> selectAll()
-    {
+    public List<Patient> selectAll() {
         return patientService.selectAll();
     }
+
     @ResponseBody
     @RequestMapping("/refund")
-    public int refund(int pid){
+    public int refund(int pid) {
         int ret = patientService.refund(pid);
         return patientService.refund(pid);
     }
@@ -103,7 +127,7 @@ public class PatientController {
     @ResponseBody
     @RequestMapping("/getPatientData")
 //    public List<Patient> getPatientData(@RequestParam("pagenum") int pagenum,@RequestParam("pagesize") int pagesize){
-        public List<Patient> getPatientData(int pagenum,int pagesize){
-        return patientService.getPatientData(pagenum,pagesize);
+    public List<Patient> getPatientData(int pagenum, int pagesize) {
+        return patientService.getPatientData(pagenum, pagesize);
     }
 }

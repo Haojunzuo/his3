@@ -28,7 +28,7 @@ $(function(){//页面的初始化行为，有三种语法形式：$(document).re
 			success:function (data) {
 				// alert(data);
 				if (data=="门诊管理员"){
-					location.href = "/Patient/PatientController/getPatientData?pagesize="+2+"&pagenum="+1;//可以调用页面，但是页面不好拦截
+					// location.href = "/Patient/PatientController/getPatientData";//可以调用页面，但是页面不好拦截
 					location.href = "/Patient/PatientController/startPatient"
 				}else if(data=="医生管理员"){
 					location.href = "/Doctor/MedicalRecordController/startMedicalRecord";
@@ -38,4 +38,9 @@ $(function(){//页面的初始化行为，有三种语法形式：$(document).re
 			}
 		})
 	});
+
+	// var message = request.getAttribute("message");
+	// if(message!=null&&message!=""){
+	// 	alert(message);
+	// }
 });

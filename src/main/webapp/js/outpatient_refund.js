@@ -105,7 +105,7 @@ $(function () {
 
 	//点击门诊收费管理进入收费页面
 	$("#div1_2").click(function(){
-		location.href="/outpatient_pay.html";
+		location.href="/Patient/PayController/startPay";
 	});
 
 	// //点击退号管理进入退号页面  。。。。。这个是点击退号，不能进入退号页面，应该直接退号

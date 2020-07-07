@@ -95,18 +95,19 @@
 $(function () {
 	//点击病例进入病例页面
 	$("#div1_1").click(function(){
-		location.href="/Patient/MedicalRecordController/startMedicalRecord";
-	});
-
-	//点击检验申请进入下一页面
-	$("#div1_3").click(function(){
-		location.href="doctor_inspectitem.html";
+		location.href="/Doctor/MedicalRecordController/startMedicalRecord";
 	});
 
 	//点击检查申请进入检查申请页面
 	$("#div1_2").click(function(){
-		location.href="doctor_checkitem.html";
+		location.href="/Doctor/CheckItemController/startCheckItem";
 	});
+
+	//点击检验申请进入下一页面
+	$("#div1_3").click(function(){
+		location.href="/Doctor/InspectItemController/startInspectItem";
+	});
+
 	// $("#search").click(function () {
 	// 	var pid = $("#pid").val();
 	// 	if(pid==""){
@@ -185,7 +186,7 @@ $(function () {
 			location.reload();
 		}else{
 			$.ajax({
-				url:"/Patient/PatientController/selectByPid",
+				url:"/Patient/PatientController/selectByPid1",
 				data:"pid="+$("#pid").val(),
 				success:function (data) {
 					// alert(data.iirList[0].amount);
@@ -224,7 +225,7 @@ $(function () {
 								$("#result").attr("readonly",false);
 								$("#finalresult").attr("readonly",false);
 								$("#submitItem").attr("disabled",false);
-								$("#submitItem").css("color","green");
+								$("#submitItem").css("color","blue");
 
 							}else if(data.medicalRecord.result!=null&&data.medicalRecord.result!=""&&data.medicalRecord.finalresult!=null&&data.medicalRecord.finalresult!=""){
 								$("#result").val(data.medicalRecord.result);

@@ -143,7 +143,7 @@ $(function(){
 		}else{
 			$.ajax({
 				type:"post",
-				url:"/PayController/doPay",
+				url:"/Patient/PayController/doPay",
 				data: $("#form1").serialize(),
 				// dataType:"json",
 				success:function (data) {
@@ -168,7 +168,7 @@ $(function(){
 
 	//点击门诊收费管理进入收费页面
 	$("#div1_2").click(function(){
-		location.href="/outpatient_pay.html";
+		location.href="/Patient/PayController/startPay";
 	});
 
 	//点击退号管理进入退号页面
